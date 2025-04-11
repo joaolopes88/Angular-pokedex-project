@@ -1,0 +1,33 @@
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col" *ngFor="let pokemon of data">
+        <div class="card shadow-sm">
+          <img
+            [src]="pokemon.image"
+            class="bd-placeholder-img card-img-top"
+            alt="{{ pokemon.name }}"
+          />
+          <div class="card-body">
+            <h5 class="card-title text-capitalize">{{ pokemon.name }}</h5>
+            <p class="card-text">
+             Click below to view more details.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a
+                  [href]="pokemon.url"
+                  target="_blank"
+                  class="btn btn-sm btn-outline-primary"
+                >
+                  View
+                </a>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

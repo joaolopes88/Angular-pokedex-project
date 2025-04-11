@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+
+import { DisplaypokemonComponent } from "./displaypokemon/displaypokemon.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [DisplaypokemonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
