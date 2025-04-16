@@ -1,3 +1,15 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DisplaypokemonComponent } from './displaypokemon/displaypokemon.component';
+import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  { path: '', component: DisplaypokemonComponent },
+  { path: 'pokemon-detail/:id', component: PokemonDetailComponent },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}

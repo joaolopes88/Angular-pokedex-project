@@ -1,28 +1,33 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
+import { Component, OnInit } from '@angular/core';
+import { PokemonService } from '../pokemon.service';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-displaypokemon',
-  imports: [HttpClientModule, CommonModule], 
   templateUrl: './displaypokemon.component.html',
-  styleUrl: './displaypokemon.component.css',
+  styleUrls: ['./displaypokemon.component.css'],
+  imports: [CommonModule, RouterModule],
+  standalone: true,
 })
 export class DisplaypokemonComponent implements OnInit {
-  httpClient = inject(HttpClient);
   data: any[] = [];
 
+  constructor(private pokemonService: PokemonService, private router: Router) {}
+
   ngOnInit() {
-    this.httpClient
-      .get('https://pokeapi.co/api/v2/pokemon?limit=20')
-      .subscribe((response: any) => {
-        this.data = response.results.map((pokemon: any, index: number) => ({
-          name: pokemon.name,
-          url: pokemon.url,
-          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-            index + 1
-          }.png`,
-        }));
-      });
+    this.pokemonService.getPokemonList().subscribe((response: any) => {
+      this.data = response.results.map((pokemon: any, index: number) => ({
+        name: pokemon.name,
+        url: pokemon.url,
+        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+          index + 1
+        }.png`,
+      }));
+    });
+  }
+
+  viewDetails(name: string) {
+    this.router.navigate(['/pokemon-detail', name]);
   }
 }

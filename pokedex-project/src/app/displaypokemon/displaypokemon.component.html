@@ -11,19 +11,17 @@
           <div class="card-body">
             <h5 class="card-title text-capitalize">{{ pokemon.name }}</h5>
             <p class="card-text">
-             Click below to view more details.
+              Click below to view more details.
             </p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
                 <a
-                  [href]="pokemon.url"
-                  target="_blank"
+                  [routerLink]="['/pokemon-detail', pokemon.id]"
                   class="btn btn-sm btn-outline-primary"
                 >
                   View
                 </a>
               </div>
-             
             </div>
           </div>
         </div>

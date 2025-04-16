@@ -1,0 +1,10 @@
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="!loading && pokemon">
+  <h1>{{ pokemon.name | uppercase }}</h1>
+  <img [src]="pokemon.sprites?.front_default" alt="{{ pokemon.name }}" />
+  <p><strong>ID:</strong> {{ pokemon.id }}</p>
+  <p><strong>Types:</strong> {{ getPokemonTypes() }}</p>
+  <p><strong>Abilities:</strong> {{ getPokemonAbilities() }}</p>
+  <p><strong>Weight:</strong> {{ pokemon.weight }}</p>
+  <p><strong>Height:</strong> {{ pokemon.height }}</p>
+</div>
