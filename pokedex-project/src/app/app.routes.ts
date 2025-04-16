@@ -4,8 +4,9 @@ import { DisplaypokemonComponent } from './displaypokemon/displaypokemon.compone
 import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 
 export const routes: Routes = [
-  { path: '', component: DisplaypokemonComponent },
-  { path: 'pokemon-detail/:id', component: PokemonDetailComponent },
+  { path: 'displaypokemon', component: DisplaypokemonComponent },
+  { path: 'pokemon-detail/:name', component: PokemonDetailComponent },
+  { path: '', redirectTo: '/displaypokemon', pathMatch: 'full' },
 ];
 
 @NgModule({
