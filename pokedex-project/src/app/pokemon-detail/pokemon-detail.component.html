@@ -3,25 +3,44 @@
 <div *ngIf="loading">Loading...</div>
 
 <div *ngIf="!loading && pokemon" class="d-flex flex-column align-items-center mt-4">
-  <div class="card" [ngStyle]="getCardStyle()" style="width: 26rem;">
+  <div 
+    class="card pokemon-detail-card shadow-lg position-relative"
+    [ngStyle]="getCardStyle()"
+    style="width: 26rem; border-width: 4px;"
+  >
+    <!-- ID Badge -->
+    <span class="position-absolute top-0 start-0 badge bg-secondary id-badge">
+      #{{ pokemon.id }}
+    </span>
     <img
-      class="card-img-top"
+      class="card-img-top bg-light p-3"
       [src]="pokemon.sprites?.front_default"
       alt="{{ pokemon.name }}"
+      style="height: 220px; object-fit: contain;"
     />
-    <div class="card-body">
-      <h5 class="card-title">{{ pokemon.name | uppercase }}</h5>
-      <p class="card-text">
-        <strong>ID:</strong> {{ pokemon.id }}<br />
-        <strong>Types:</strong> {{ getPokemonTypes() }}<br />
-        <strong>Abilities:</strong> {{ getPokemonAbilities() }}<br />
-        <strong>Weight:</strong> {{ pokemon.weight }}<br />
-        <strong>Height:</strong> {{ pokemon.height }}
-      </p>
+    <div class="card-body text-center">
+      <h3 class="card-title mb-3 text-capitalize fw-bold">{{ pokemon.name }}</h3>
+      <div class="mb-2">
+        <span *ngFor="let type of pokemon.types" class="badge me-1" [ngStyle]="{'background': typeColors[type.type.name] || '#888', 'color': '#fff'}">
+          {{ type.type.name | titlecase }}
+        </span>
+      </div>
+      <hr>
+      <div class="row mb-2">
+        <div class="col-6 text-end text-muted">Abilities:</div>
+        <div class="col-6 text-start">{{ getPokemonAbilities() }}</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-6 text-end text-muted">Weight:</div>
+        <div class="col-6 text-start">{{ pokemon.weight }}</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-6 text-end text-muted">Height:</div>
+        <div class="col-6 text-start">{{ pokemon.height }}</div>
+      </div>
     </div>
   </div>
 
- 
   <div class="mt-3">
     <button
       class="btn btn-warning me-2"
@@ -38,3 +57,20 @@
     </button>
   </div>
 </div>
+
+<style>
+.pokemon-detail-card {
+  border-radius: 1px;
+  border-style: solid;
+  min-height: 480px;
+  background: #f8f9fa;
+}
+.id-badge {
+  font-size: 1.1rem;
+  left: 1rem !important;
+  top: 1rem !important;
+  padding: 0.5em 1em;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+</style>
