@@ -58,6 +58,7 @@ export class DisplaypokemonComponent implements OnInit {
     this.pokemonService.getPokemonList(this.offset, this.limit).subscribe(
       (response: any) => {
         const newPokemon = response.results.map((pokemon: any, index: number) => ({
+          id: this.offset + index + 1, // Add this line
           name: pokemon.name,
           url: pokemon.url,
           image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${

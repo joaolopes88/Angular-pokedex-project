@@ -100,4 +100,5 @@ export class PokemonDetailComponent implements OnInit {
       this.loadPokemon();
     });
   }
+  
 }

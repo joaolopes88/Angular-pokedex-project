@@ -42,7 +42,11 @@
   <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <div class="col" *ngFor="let pokemon of filteredData">
-        <div class="card shadow-sm" [ngStyle]="getCardStyle(pokemon.types)">
+        <div class="card shadow-sm position-relative" [ngStyle]="getCardStyle(pokemon.types)">
+          <!-- Pokémon ID in the top-left corner -->
+        <div class="position-absolute top-0 start-0 bg-secondary text-white px-2 py-1">
+            #{{ pokemon.id }}
+          </div>
           <img
             [src]="pokemon.image"
             class="bd-placeholder-img card-img-top"
@@ -54,10 +58,10 @@
               Click below to view more details.
             </p>
             <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
+              <div class="btn-group bg-secondary ">
                 <a
                   [routerLink]="['/pokemon-detail', pokemon.name]"
-                  class="btn btn-sm btn-primary"
+                  class="btn btn-sm btn-primary bg-secondary text-white px-2 py-1"
                 >
                   View
                 </a>
