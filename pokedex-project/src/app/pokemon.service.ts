@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root', // Ensure this is present
+  providedIn: 'root',
 })
 export class PokemonService {
   private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
+  private typeUrl = 'https://pokeapi.co/api/v2/type'; // Corrected URL for types
 
   constructor(private http: HttpClient) {}
 
@@ -16,5 +17,9 @@ export class PokemonService {
 
   getPokemonDetails(name: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${name}`);
+  }
+
+  getPokemonTypes(): Observable<any> {
+    return this.http.get(this.typeUrl); // Corrected endpoint
   }
 }
