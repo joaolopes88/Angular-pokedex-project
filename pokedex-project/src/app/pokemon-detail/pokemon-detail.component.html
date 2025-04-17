@@ -1,10 +1,27 @@
+<style>
+  body {
+    background-color: rgb(71, 71, 71);
+  }
+</style>
 <div *ngIf="loading">Loading...</div>
-<div *ngIf="!loading && pokemon">
-  <h1>{{ pokemon.name | uppercase }}</h1>
-  <img [src]="pokemon.sprites?.front_default" alt="{{ pokemon.name }}" />
-  <p><strong>ID:</strong> {{ pokemon.id }}</p>
-  <p><strong>Types:</strong> {{ getPokemonTypes() }}</p>
-  <p><strong>Abilities:</strong> {{ getPokemonAbilities() }}</p>
-  <p><strong>Weight:</strong> {{ pokemon.weight }}</p>
-  <p><strong>Height:</strong> {{ pokemon.height }}</p>
+
+<div *ngIf="!loading && pokemon" class="d-flex justify-content-center mt-4">
+  <div class="card" style="width: 26rem;">
+    <img
+      class="card-img-top"
+      [src]="pokemon.sprites?.front_default"
+      alt="{{ pokemon.name }}"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ pokemon.name | uppercase }}</h5>
+      <p class="card-text">
+        <strong>ID:</strong> {{ pokemon.id }}<br />
+        <strong>Types:</strong> {{ getPokemonTypes() }}<br />
+        <strong>Abilities:</strong> {{ getPokemonAbilities() }}<br />
+        <strong>Weight:</strong> {{ pokemon.weight }}<br />
+        <strong>Height:</strong> {{ pokemon.height }}
+      </p>
+     <!--<a routerLink="/router-outlet" class="btn btn-primary">Go back</a> --> 
+    </div>
+  </div>
 </div>
