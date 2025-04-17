@@ -10,6 +10,7 @@
           class="form-control"
           placeholder="Search Pokémon by name"
           [(ngModel)]="searchTerm"
+          (input)="filterPokemon()"
         />
         <span class="input-group-text">
           <i class="fas fa-search"></i>
@@ -52,12 +53,20 @@
             </p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a [routerLink]="['/pokemon-detail', pokemon.name]" class="btn btn-sm btn-primary">View</a>
+                <a
+                  [routerLink]="['/pokemon-detail', pokemon.name]"
+                  class="btn btn-sm btn-primary"
+                >
+                  View
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div *ngIf="loading" class="text-center mt-3">
+      <p>Loading more Pokémon...</p>
     </div>
   </div>
 </div>
