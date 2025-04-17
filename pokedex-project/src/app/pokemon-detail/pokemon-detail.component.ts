@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../pokemon.service';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-pokemon-detail',
   templateUrl: './pokemon-detail.component.html',
   styleUrls: ['./pokemon-detail.component.css'],
-  imports: [CommonModule], // No need for HttpClientModule here
+  imports: [CommonModule, NavbarComponent], // No need for HttpClientModule here
   standalone: true,
 })
 export class PokemonDetailComponent implements OnInit {

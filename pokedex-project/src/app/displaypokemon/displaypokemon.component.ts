@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-displaypokemon',
   templateUrl: './displaypokemon.component.html',
   styleUrls: ['./displaypokemon.component.css'],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NavbarComponent],
   standalone: true,
 })
 export class DisplaypokemonComponent implements OnInit {
