@@ -6,7 +6,7 @@ import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.componen
 export const routes: Routes = [
   { path: 'displaypokemon', component: DisplaypokemonComponent },
   { path: 'pokemon-detail/:name', component: PokemonDetailComponent },
-  { path: '', redirectTo: '/displaypokemon', pathMatch: 'full' },
+  { path: '', component: DisplaypokemonComponent }, // Default route
 ];
 
 @NgModule({
