@@ -19,6 +19,27 @@ export class DisplaypokemonComponent implements OnInit {
   private _searchTerm: string = '';
   selectedType: string = '';
 
+  typeColors: { [key: string]: string } = {
+    normal: '#A8A77A',
+    fire: '#EE8130',
+    water: '#6390F0',
+    electric: '#F7D02C',
+    grass: '#7AC74C',
+    ice: '#96D9D6',
+    fighting: '#C22E28',
+    poison: '#A33EA1',
+    ground: '#E2BF65',
+    flying: '#A98FF3',
+    psychic: '#F95587',
+    bug: '#A6B91A',
+    rock: '#B6A136',
+    ghost: '#735797',
+    dragon: '#6F35FC',
+    dark: '#705746',
+    steel: '#B7B7CE',
+    fairy: '#D685AD',
+  };
+
   constructor(private pokemonService: PokemonService, private router: Router) {}
 
   ngOnInit() {
@@ -66,6 +87,19 @@ export class DisplaypokemonComponent implements OnInit {
         : true;
       return matchesName && matchesType;
     });
+  }
+
+  getCardStyle(types: string[]): { [key: string]: string } {
+    if (types.length === 1) {
+      return {
+        background: `${this.typeColors[types[0]]}B3`, // 70% opacity
+      };
+    } else if (types.length === 2) {
+      return {
+        background: `linear-gradient(to right, ${this.typeColors[types[0]]}B3, ${this.typeColors[types[1]]}B3)`,
+      };
+    }
+    return {};
   }
 
   viewDetails(name: string) {
