@@ -1,0 +1,9 @@
+a.text-decoration-none {
+    color: inherit !important;
+  }
+  a.text-decoration-none:hover,
+  a.text-decoration-none:focus {
+    color: inherit !important;
+    text-decoration: none !important;
+    box-shadow: 0 0 0 0.1rem #8882;
+  }

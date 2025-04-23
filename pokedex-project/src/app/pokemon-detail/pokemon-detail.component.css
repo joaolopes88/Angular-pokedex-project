@@ -1,3 +1,17 @@
 body{
     background-color: rgb(71, 71, 71);
 }
+.pokemon-detail-card {
+    border-radius: 1px;
+    border-style: solid;
+    min-height: 480px;
+    background: #f8f9fa;
+  }
+  .id-badge {
+    font-size: 1.1rem;
+    left: 1rem !important;
+    top: 1rem !important;
+    padding: 0.5em 1em;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }

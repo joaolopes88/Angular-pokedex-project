@@ -1,35 +1,36 @@
 <app-navbar></app-navbar>
 
-<div *ngIf="loading">Loading...</div>
-
 <div *ngIf="!loading && pokemon" class="d-flex flex-column align-items-center mt-4">
   <div 
     class="card pokemon-detail-card shadow-lg position-relative"
     [ngStyle]="getCardStyle()"
-    style="width: 26rem; border-width: 4px;"
+    style="width: 38rem; border-width: 5px;"
   >
-    <!-- ID Badge -->
+  
     <span class="position-absolute top-0 start-0 badge bg-secondary id-badge">
       #{{ pokemon.id }}
     </span>
+    
     <img
-      class="card-img-top bg-light p-3"
-      [src]="pokemon.sprites?.front_default"
-      alt="{{ pokemon.name }}"
-      style="height: 220px; object-fit: contain;"
-    />
+    class="card-img-top bg-light p-2"
+    [src]="pokemon.sprites?.front_default"
+    alt="{{ pokemon.name }}"
+    style="height: 150px; object-fit: contain;"
+  />
     <div class="card-body text-center">
       <h3 class="card-title mb-3 text-capitalize fw-bold">{{ pokemon.name }}</h3>
       <div class="mb-2">
-        <span *ngFor="let type of pokemon.types" class="badge me-1" [ngStyle]="{'background': typeColors[type.type.name] || '#888', 'color': '#fff'}">
+        <span
+          *ngFor="let type of pokemon.types"
+          class="badge me-1 d-inline-flex align-items-center"
+          [ngStyle]="{ 'background': typeColors[type.type.name] || '#888', 'color': '#fff' }"
+        >
+        <img [src]="'assets/icons/' + type.type.name + '.svg'" style="width: 32px; margin-right: 3px;" alt="{{ type.type.name }} icon" />
+          {{ type.type.name | titlecase }}
           {{ type.type.name | titlecase }}
         </span>
       </div>
       <hr>
-      <div class="row mb-2">
-        <div class="col-6 text-end text-muted">Abilities:</div>
-        <div class="col-6 text-start">{{ getPokemonAbilities() }}</div>
-      </div>
       <div class="row mb-2">
         <div class="col-6 text-end text-muted">Weight:</div>
         <div class="col-6 text-start">{{ pokemon.weight }}</div>
@@ -37,6 +38,43 @@
       <div class="row mb-2">
         <div class="col-6 text-end text-muted">Height:</div>
         <div class="col-6 text-start">{{ pokemon.height }}</div>
+      </div>
+      <hr>
+     
+      <div class="row text-start">
+        <div class="col-6">
+          <strong>Abilities</strong>
+          <ul class="mb-0">
+            <li *ngFor="let ability of pokemon.abilities">
+              {{ ability.ability.name | titlecase }}
+            </li>
+          </ul>
+          <div class="mt-3" style="font-size: 13px;">
+            <strong>Base Stats</strong>
+            <div *ngFor="let stat of pokemon.stats">
+              <ng-container *ngIf="stat.stat.name === 'hp' || stat.stat.name === 'attack' || stat.stat.name === 'defense'">
+                <div class="d-flex align-items-center mb-1">
+                  <span style="width: 70px;">{{ stat.stat.name | titlecase }}</span>
+                  <div class="progress flex-grow-1 mx-2" style="height: 14px;">
+                    <div class="progress-bar bg-info" role="progressbar" [style.width.%]="stat.base_stat / 2" [attr.aria-valuenow]="stat.base_stat" aria-valuemin="0" aria-valuemax="200"></div>
+                  </div>
+                  <span>{{ stat.base_stat }}</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-6" style="font-size: 13px;">
+          <strong>Base Stats</strong>
+          <div *ngFor="let stat of pokemon.stats" class="d-flex align-items-center mb-1">
+            <span style="width: 70px;">{{ stat.stat.name | titlecase }}</span>
+            <div class="progress flex-grow-1 mx-2" style="height: 14px;">
+              <div class="progress-bar bg-info" role="progressbar" [style.width.%]="stat.base_stat / 2" [attr.aria-valuenow]="stat.base_stat" aria-valuemin="0" aria-valuemax="200"></div>
+            </div>
+            <span>{{ stat.base_stat }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -57,20 +95,3 @@
     </button>
   </div>
 </div>
-
-<style>
-.pokemon-detail-card {
-  border-radius: 1px;
-  border-style: solid;
-  min-height: 480px;
-  background: #f8f9fa;
-}
-.id-badge {
-  font-size: 1.1rem;
-  left: 1rem !important;
-  top: 1rem !important;
-  padding: 0.5em 1em;
-  border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-</style>

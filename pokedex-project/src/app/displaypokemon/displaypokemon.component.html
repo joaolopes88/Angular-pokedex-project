@@ -40,35 +40,29 @@
 
 <div class="album py-5">
   <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-2">
       <div class="col" *ngFor="let pokemon of filteredData">
-        <div class="card shadow-sm position-relative" [ngStyle]="getCardStyle(pokemon.types)">
-          <!-- Pokémon ID in the top-left corner -->
-        <div class="position-absolute top-0 start-0 bg-secondary text-white px-2 py-1">
-            #{{ pokemon.id }}
-          </div>
-          <img
-            [src]="pokemon.image"
-            class="bd-placeholder-img card-img-top"
-            alt="{{ pokemon.name }}"
-          />
-          <div class="card-body">
-            <h5 class="card-title text-capitalize">{{ pokemon.name }}</h5>
-            <p class="card-text">
-              Click below to view more details.
-            </p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group bg-secondary ">
-                <a
-                  [routerLink]="['/pokemon-detail', pokemon.name]"
-                  class="btn btn-sm btn-primary bg-secondary text-white px-2 py-1"
-                >
-                  View
-                </a>
-              </div>
+        <a
+          [routerLink]="['/pokemon-detail', pokemon.name]"
+          class="text-decoration-none"
+          style="display: block;"
+        >
+          <div class="card shadow-sm position-relative" [ngStyle]="getCardStyle(pokemon.types)">
+            <div class="position-absolute top-0 start-0 bg-secondary text-white px-2 py-1">
+              #{{ pokemon.id }}
+            </div>
+            <img
+              [src]="pokemon.image"
+              class="bd-placeholder-img card-img-top"
+              alt="{{ pokemon.name }}"
+            />
+            <div class="card-body">
+              <h5 class="card-title text-capitalize m-0" style="font-size: 1.25rem;">
+                {{ pokemon.name }}
+              </h5>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
     <div *ngIf="loading" class="text-center mt-3">
