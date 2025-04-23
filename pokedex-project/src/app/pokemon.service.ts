@@ -22,4 +22,12 @@ export class PokemonService {
   getPokemonTypes(): Observable<any> {
     return this.http.get(this.typeUrl); // Corrected endpoint
   }
+  
+  getPokemonSpecies(url: string) {
+    return this.http.get<any>(url);
+  }
+
+  getEvolutionChain(url: string) {
+    return this.http.get<any>(url);
+  }
 }

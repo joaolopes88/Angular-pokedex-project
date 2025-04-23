@@ -4,7 +4,7 @@
   <div 
     class="card pokemon-detail-card shadow-lg position-relative"
     [ngStyle]="getCardStyle()"
-    style="width: 38rem; border-width: 5px;"
+    style="width: 40rem; border-width: 5px;"
   >
   
     <span class="position-absolute top-0 start-0 badge bg-secondary id-badge">
@@ -54,7 +54,7 @@
             <div *ngFor="let stat of pokemon.stats">
               <ng-container *ngIf="stat.stat.name === 'hp' || stat.stat.name === 'attack' || stat.stat.name === 'defense'">
                 <div class="d-flex align-items-center mb-1">
-                  <span style="width: 70px;">{{ stat.stat.name | titlecase }}</span>
+                  <span style="width: 70px;">{{ stat.stat.name | titlecase }}</span> 
                   <div class="progress flex-grow-1 mx-2" style="height: 14px;">
                     <div class="progress-bar bg-info" role="progressbar" [style.width.%]="stat.base_stat / 2" [attr.aria-valuenow]="stat.base_stat" aria-valuemin="0" aria-valuemax="200"></div>
                   </div>
@@ -73,6 +73,21 @@
               <div class="progress-bar bg-info" role="progressbar" [style.width.%]="stat.base_stat / 2" [attr.aria-valuenow]="stat.base_stat" aria-valuemin="0" aria-valuemax="200"></div>
             </div>
             <span>{{ stat.base_stat }}</span>
+          </div>
+        </div>
+        
+      </div>
+      <hr>
+      <div class="evolution-chart mt-4">
+        <h5>Evolution</h5>
+        <div class="d-flex align-items-center justify-content-center">
+          <div *ngFor="let evolution of evolutionChain; let last = last" class="d-flex align-items-center">
+            <div class="evolution-stage text-center">
+              <img *ngIf="evolution.sprite" [src]="evolution.sprite" alt="{{ evolution.name }}" class="evolution-image" style="width: 80px; height: 80px; object-fit: contain;"
+              />
+              <div>{{ evolution.name | titlecase }}</div>
+            </div>
+            <span *ngIf="!last" class="mx-2">🡢</span>
           </div>
         </div>
       </div>

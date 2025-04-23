@@ -14,6 +14,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
 export class PokemonDetailComponent implements OnInit {
   pokemon: any = null;
   loading: boolean = true;
+  evolutionChain: { name: string; sprite: string }[] = []; // Simplified property
 
   typeColors: { [key: string]: string } = {
     normal: '#A8A77A',
@@ -53,6 +54,7 @@ export class PokemonDetailComponent implements OnInit {
       this.pokemonService.getPokemonDetails(name).subscribe(
         (data) => {
           this.pokemon = data;
+          this.loadEvolutionChain(data.species.url); // Fetch evolution chain
           this.loading = false;
         },
         (error) => {
@@ -61,6 +63,38 @@ export class PokemonDetailComponent implements OnInit {
         }
       );
     }
+  }
+
+  loadEvolutionChain(speciesUrl: string) {
+    this.pokemonService.getPokemonSpecies(speciesUrl).subscribe(
+      (speciesData) => {
+        const evolutionChainUrl = speciesData.evolution_chain.url;
+        this.pokemonService.getEvolutionChain(evolutionChainUrl).subscribe(
+          (evolutionData) => {
+            this.evolutionChain = [];
+            this.buildEvolutionChain(evolutionData.chain);
+          },
+          (error) => console.error('Error fetching evolution chain:', error)
+        );
+      },
+      (error) => console.error('Error fetching Pokémon species:', error)
+    );
+  }
+
+  buildEvolutionChain(chain: any) {
+    if (!chain) return;
+    this.pokemonService.getPokemonDetails(chain.species.name).subscribe(
+      (pokemonData) => {
+        this.evolutionChain.push({
+          name: chain.species.name,
+          sprite: pokemonData.sprites.front_default,
+        });
+        if (chain.evolves_to.length > 0) {
+          this.buildEvolutionChain(chain.evolves_to[0]); // Recursively process the next evolution
+        }
+      },
+      (error) => console.error('Error fetching Pokémon sprite:', error)
+    );
   }
 
   getPokemonTypes(): string {
